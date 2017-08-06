@@ -1,11 +1,17 @@
 package com.twu.biblioteca;
 
 
+import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
     public BibliotecaApp bibliotecaAppObj = new BibliotecaApp();
+
+    @Before
+    public void beforeThings(){
+        bibliotecaAppObj.initBookInfo();
+    }
 
     @Test
     public void getAllBooksListTest() {
@@ -21,6 +27,7 @@ public class ExampleTest {
     @Test
     public void checkoutBookMessageTest() {
         assertEquals("Thank you! Enjoy the book\n", bibliotecaAppObj.checkoutBook("Math"));
+        assertEquals("That book is not available\n", bibliotecaAppObj.checkoutBook("Math"));
         assertEquals("That book is not available\n", bibliotecaAppObj.checkoutBook("English"));
     }
 
@@ -33,6 +40,7 @@ public class ExampleTest {
     public void returnBookMessageTest() {
         bibliotecaAppObj.checkoutBook("Math");
         assertEquals("Thank you for returning the book\n", bibliotecaAppObj.returnBook("Math"));
+        assertEquals("That is not a valid book to return\n", bibliotecaAppObj.returnBook("Math"));
         assertEquals("That is not a valid book to return\n", bibliotecaAppObj.returnBook("English"));
     }
 

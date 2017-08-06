@@ -1,22 +1,28 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-    private static String[] bookList= {"Math","Chemical","Computer"};
-    private static String[] authorList= {"John","Mike","Lucy"};
-    private static String[] publishList= {"A","B","C"};
-    private static boolean[] statusList= {true,true,true};
+    private static ArrayList<Book> bookList = new ArrayList<Book>();
 
     public static void main(String[] args) {
+        initBookInfo();
         welcomePage();
+    }
+
+    //初始化全部书籍信息
+    public static void initBookInfo() {
+        bookList.add(new Book("Math","John","A"));
+        bookList.add(new Book("Chemical","Mike","B"));
+        bookList.add(new Book("Computer","Lucy","C"));
     }
 
     //获取全部书籍列表
     public static String getAllBooksList() {
         String bookListStr = "";
-        for(String book:bookList){
-            bookListStr += book + "\n";
+        for(Book book:bookList){
+            bookListStr += book.getName() + "\n";
         }
         return bookListStr;
     }
@@ -24,9 +30,9 @@ public class BibliotecaApp {
     //获取书籍详情
     public static String getBookDetail(String bookName) {
         String bookDetailStr = "";
-        for(int i=0;i<bookList.length;i++){
-            if(bookList[i].equals(bookName)){
-                bookDetailStr = bookName + "\n" +authorList[i] + "\n" + publishList[i] + "\n";
+        for(Book book:bookList){
+            if(book.getName().equals(bookName)){
+                bookDetailStr = bookName + "\n" +book.getAuthor() + "\n" + book.getPublish() + "\n";
                 break;
             }
         }
@@ -35,12 +41,12 @@ public class BibliotecaApp {
 
     //借书
     public static String checkoutBook(String bookName) {
-        for(int i=0;i<bookList.length;i++) {
-            if (bookList[i].equals(bookName) && statusList[i]) {
-                statusList[i] = false;
+        for(Book book:bookList){
+            if(book.getName().equals(bookName) && book.getStatus()){
+                book.setStatus(false);
                 return "Thank you! Enjoy the book\n";
             }
-            else if(!bookList[i].equals(bookName) && i==bookList.length-1)
+            else if(bookList.indexOf(book)==bookList.size()-1)
                 break;
         }
         return "That book is not available\n";
@@ -48,12 +54,12 @@ public class BibliotecaApp {
 
     //还书
     public static String returnBook(String bookName) {
-        for(int i=0;i<bookList.length;i++) {
-            if (bookList[i].equals(bookName) && !statusList[i]) {
-                statusList[i] = true;
+        for(Book book:bookList){
+            if(book.getName().equals(bookName) && !book.getStatus()){
+                book.setStatus(true);
                 return "Thank you for returning the book\n";
             }
-            else if(!bookList[i].equals(bookName) && i==bookList.length-1)
+            else if(!book.getName().equals(bookName) && bookList.indexOf(book)==bookList.size()-1)
                 break;
         }
         return "That is not a valid book to return\n";
@@ -61,9 +67,9 @@ public class BibliotecaApp {
 
     //获取书籍借阅状态
     public boolean getBookStatus(String bookName) {
-        for(int i=0;i<bookList.length;i++){
-            if(bookList[i].equals(bookName)){
-                return statusList[i];
+        for(Book book:bookList){
+            if(book.getName().equals(bookName)){
+                return book.getStatus();
             }
         }
         return false;
