@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.Scanner;
+
 public class BibliotecaApp {
     private static String[] bookList= {"Math","Chemical","Computer"};
     private static String[] authorList= {"John","Mike","Lucy"};
@@ -7,11 +9,11 @@ public class BibliotecaApp {
     private static boolean[] statusList= {true,true,true};
 
     public static void main(String[] args) {
-        System.out.println("Hello, world!");
+        welcomePage();
     }
 
 
-    public String getAllBooksList() {
+    public static String getAllBooksList() {
         String bookListStr = "";
         for(String book:bookList){
             bookListStr += book + "\n";
@@ -19,7 +21,7 @@ public class BibliotecaApp {
         return bookListStr;
     }
 
-    public String getBookDetail(String bookName) {
+    public static String getBookDetail(String bookName) {
         String bookDetailStr = "";
         for(int i=0;i<bookList.length;i++){
             if(bookList[i].equals(bookName)){
@@ -30,7 +32,7 @@ public class BibliotecaApp {
         return bookDetailStr;
     }
 
-    public String checkoutBook(String bookName) {
+    public static String checkoutBook(String bookName) {
         for(int i=0;i<bookList.length;i++) {
             if (bookList[i].equals(bookName) && statusList[i]) {
                 statusList[i] = false;
@@ -42,7 +44,7 @@ public class BibliotecaApp {
         return "That book is not available\n";
     }
 
-    public String returnBook(String bookName) {
+    public static String returnBook(String bookName) {
         for(int i=0;i<bookList.length;i++) {
             if (bookList[i].equals(bookName) && !statusList[i]) {
                 statusList[i] = true;
@@ -64,4 +66,41 @@ public class BibliotecaApp {
         return false;
     }
 
+    public static void welcomePage() {
+        System.out.println("Welcome to Biblioteca!");
+        while(true){
+            System.out.println("select a service please:\n1:getAllBooksList\n2:getBookDetail\n3:checkoutBook\n4:returnBook\n5:quit\n");
+            Scanner sc = new Scanner(System.in);
+            int number = sc.nextInt();
+            switch(number) {
+                case 1: {
+                    System.out.println(getAllBooksList());
+                    break;
+                }
+                case 2: {
+                    System.out.println("input book name:\n");
+                    sc = new Scanner(System.in);
+                    String bookname = sc.nextLine();
+                    System.out.println(getBookDetail(bookname));
+                    break;
+                }
+                case 3: {
+                    System.out.println("input book name:\n");
+                    sc = new Scanner(System.in);
+                    String bookname = sc.nextLine();
+                    System.out.println(checkoutBook(bookname));
+                    break;
+                }
+                case 4: {
+                    System.out.println("input book name:\n");
+                    sc = new Scanner(System.in);
+                    String bookname = sc.nextLine();
+                    System.out.println(returnBook(bookname));
+                    break;
+                }
+                case 5: System.exit(1);
+                default: break;
+            }
+        }
+    }
 }
