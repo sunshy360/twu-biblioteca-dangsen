@@ -5,12 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class ExampleTest {
+public class BibliotecaAppTest {
     public BibliotecaApp bibliotecaAppObj = new BibliotecaApp();
 
     @Before
     public void beforeThings(){
         bibliotecaAppObj.initBookInfo();
+        bibliotecaAppObj.initMovieInfo();
     }
 
     @Test
@@ -49,6 +50,17 @@ public class ExampleTest {
         bibliotecaAppObj.checkoutBook("Math");
         bibliotecaAppObj.returnBook("Math");
         assertEquals(true, bibliotecaAppObj.getBookStatus("Math"));
+    }
+
+    @Test
+    public void getAllMoviesListTest() {
+        assertEquals("Titanic\nInception\n", bibliotecaAppObj.getAllMoviesList());
+    }
+
+    @Test
+    public void getMovieDetailTest() {
+        assertEquals("Titanic\n1998\nCameron\n9\ntrue\n", bibliotecaAppObj.getMovieDetail("Titanic"));
+        assertEquals("Inception\n2010\nNolan\n9\ntrue\n", bibliotecaAppObj.getMovieDetail("Inception"));
     }
 
     @Test

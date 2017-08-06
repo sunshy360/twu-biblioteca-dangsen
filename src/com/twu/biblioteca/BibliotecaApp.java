@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
     private static ArrayList<Book> bookList = new ArrayList<Book>();
+    private static ArrayList<Movie> movieList = new ArrayList<Movie>();
 
     public static void main(String[] args) {
         initBookInfo();
+        initMovieInfo();
         welcomePage();
     }
 
@@ -16,6 +18,12 @@ public class BibliotecaApp {
         bookList.add(new Book("Math","John","A"));
         bookList.add(new Book("Chemical","Mike","B"));
         bookList.add(new Book("Computer","Lucy","C"));
+    }
+
+    //初始化全部电影信息
+    public static void initMovieInfo() {
+        movieList.add(new Movie("Titanic",1998,"Cameron",9));
+        movieList.add(new Movie("Inception",2010,"Nolan",9));
     }
 
     //获取全部书籍列表
@@ -113,5 +121,24 @@ public class BibliotecaApp {
                 default: break;
             }
         }
+    }
+
+    public String getAllMoviesList() {
+        String movieListStr = "";
+        for(Movie movie:movieList){
+            movieListStr += movie.getName() + "\n";
+        }
+        return movieListStr;
+    }
+
+    public String getMovieDetail(String movieName) {
+        String movieDetailStr = "";
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName)){
+                movieDetailStr = movieName + "\n" +movie.getYear() + "\n" + movie.getDirector()+ "\n" + movie.getRating() + "\n" + movie.getStatus() + "\n";
+                break;
+            }
+        }
+        return movieDetailStr;
     }
 }
