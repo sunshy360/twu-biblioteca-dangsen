@@ -42,6 +42,19 @@ public class BibliotecaApp {
         return "That book is not available\n";
     }
 
+    public String returnBook(String bookName) {
+        for(int i=0;i<bookList.length;i++) {
+            if (bookList[i].equals(bookName) && !statusList[i]) {
+                statusList[i] = true;
+                return "Thank you for returning the book\n";
+            }
+            else if(!bookList[i].equals(bookName) && i==bookList.length-1)
+                break;
+        }
+        return "That is not a valid book to return\n";
+    }
+
+
     public boolean getBookStatus(String bookName) {
         for(int i=0;i<bookList.length;i++){
             if(bookList[i].equals(bookName)){
@@ -50,4 +63,5 @@ public class BibliotecaApp {
         }
         return false;
     }
+
 }

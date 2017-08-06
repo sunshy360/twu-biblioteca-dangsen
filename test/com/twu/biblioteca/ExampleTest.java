@@ -30,6 +30,19 @@ public class ExampleTest {
         bibliotecaAppObj.checkoutBook("Math");
         assertEquals(false, bibliotecaAppObj.getBookStatus("Math"));
     }
+    @Test
+    public void returnBookMessageTest() {
+        bibliotecaAppObj.checkoutBook("Math");
+        assertEquals("Thank you for returning the book\n", bibliotecaAppObj.returnBook("Math"));
+        assertEquals("That is not a valid book to return\n", bibliotecaAppObj.returnBook("English"));
+    }
+
+    @Test
+    public void returnBookStatusTest() {
+        bibliotecaAppObj.checkoutBook("Math");
+        bibliotecaAppObj.returnBook("Math");
+        assertEquals(true, bibliotecaAppObj.getBookStatus("Math"));
+    }
 
     @Test
     public void test() {
