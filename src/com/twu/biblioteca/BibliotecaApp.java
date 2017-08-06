@@ -1,9 +1,10 @@
 package com.twu.biblioteca;
 
 public class BibliotecaApp {
-    private String[] bookList= {"Math","Chemical","Computer"};
-    private String[] authorList= {"John","Mike","Lucy"};
-    private String[] publishList= {"A","B","C"};
+    private static String[] bookList= {"Math","Chemical","Computer"};
+    private static String[] authorList= {"John","Mike","Lucy"};
+    private static String[] publishList= {"A","B","C"};
+    private static boolean[] statusList= {true,true,true};
 
     public static void main(String[] args) {
         System.out.println("Hello, world!");
@@ -27,5 +28,26 @@ public class BibliotecaApp {
             }
         }
         return bookDetailStr;
+    }
+
+    public String checkoutBook(String bookName) {
+        for(int i=0;i<bookList.length;i++) {
+            if (bookList[i].equals(bookName) && statusList[i]) {
+                statusList[i] = false;
+                return "Thank you! Enjoy the book\n";
+            }
+            else if(!bookList[i].equals(bookName) && i==bookList.length-1)
+                break;
+        }
+        return "That book is not available\n";
+    }
+
+    public boolean getBookStatus(String bookName) {
+        for(int i=0;i<bookList.length;i++){
+            if(bookList[i].equals(bookName)){
+                return statusList[i];
+            }
+        }
+        return false;
     }
 }

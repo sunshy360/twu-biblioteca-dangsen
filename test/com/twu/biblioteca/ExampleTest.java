@@ -19,6 +19,17 @@ public class ExampleTest {
         assertEquals("Chemical\nMike\nB\n", bibliotecaAppObj.getBookDetail("Chemical"));
     }
 
+    @Test
+    public void checkoutBookMessageTest() {
+        assertEquals("Thank you! Enjoy the book\n", bibliotecaAppObj.checkoutBook("Math"));
+        assertEquals("That book is not available\n", bibliotecaAppObj.checkoutBook("English"));
+    }
+
+    @Test
+    public void checkoutBookStatusTest() {
+        bibliotecaAppObj.checkoutBook("Math");
+        assertEquals(false, bibliotecaAppObj.getBookStatus("Math"));
+    }
 
     @Test
     public void test() {
