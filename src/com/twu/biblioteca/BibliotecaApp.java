@@ -90,7 +90,7 @@ public class BibliotecaApp {
         return false;
     }
 
-
+    //获取电影列表
     public static String getAllMoviesList() {
         String movieListStr = "";
         for(Movie movie:movieList){
@@ -99,6 +99,7 @@ public class BibliotecaApp {
         return movieListStr;
     }
 
+    //获取电影详情
     public static String getMovieDetail(String movieName) {
         String movieDetailStr = "";
         for(Movie movie:movieList){
@@ -136,6 +137,7 @@ public class BibliotecaApp {
         return "That is not a valid movie to return\n";
     }
 
+    //获取电影借阅状态
     public boolean getMovieStatus(String movieName) {
         for(Movie movie:movieList){
             if(movie.getName().equals(movieName)){
@@ -145,6 +147,7 @@ public class BibliotecaApp {
         return false;
     }
 
+    //用户登录
     public static boolean userSignIn(String id, String password) {
         for(User user:userList){
             if(user.getId().equals(id) && user.getPassword().equals(password)){
@@ -155,6 +158,7 @@ public class BibliotecaApp {
         return false;
     }
 
+    //用户登出
     public static boolean userSignOut(String id) {
         for(User user:userList){
             if(user.getId().equals(id)){
@@ -165,6 +169,7 @@ public class BibliotecaApp {
         return false;
     }
 
+    //用户信息查询
     public static boolean userInfoQuery(String id, String password) {
         for(User user:userList){
             if(user.getId().equals(id) && user.getPassword().equals(password) && user.getLogState()){
