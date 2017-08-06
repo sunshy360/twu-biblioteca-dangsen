@@ -90,6 +90,13 @@ public class BibliotecaAppTest {
         bibliotecaAppObj.returnMovie("Titanic");
         assertEquals(true, bibliotecaAppObj.getMovieStatus("Titanic"));
     }
+
+    @Test
+    public void userSignInTest() {
+        assertEquals(true, bibliotecaAppObj.userSignIn("123-4567","password"));
+        assertEquals(false, bibliotecaAppObj.userSignIn("123-4567","password1"));
+    }
+
     @Test
     public void test() {
         assertEquals(1, 1);
