@@ -235,10 +235,11 @@ public class BibliotecaApp {
     public boolean userInfoQuery(String id, String password) {
         for(User user:userList){
             if(user.getId().equals(id) && user.getPassword().equals(password) && user.getLogState()){
-                user.setLogState(true);
+                System.out.println(user.toString());
                 return true;
             }
         }
+        System.out.println("invalid");
         return false;
     }
 }

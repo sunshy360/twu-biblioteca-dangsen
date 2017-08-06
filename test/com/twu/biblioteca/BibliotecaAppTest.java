@@ -98,6 +98,15 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void userInfoQueryTest() {
+        bibliotecaAppObj.userSignIn("123-4567","password");
+        assertEquals(true, bibliotecaAppObj.userInfoQuery("123-4567","password"));
+        bibliotecaAppObj.userSignOut("123-4567");
+        assertEquals(false, bibliotecaAppObj.userInfoQuery("123-4567","password"));
+        assertEquals(false, bibliotecaAppObj.userInfoQuery("123-4567","password1"));
+    }
+
+    @Test
     public void test() {
         assertEquals(1, 1);
     }
