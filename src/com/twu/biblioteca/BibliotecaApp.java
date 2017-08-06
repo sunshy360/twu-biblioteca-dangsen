@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class BibliotecaApp {
     private static ArrayList<Book> bookList = new ArrayList<Book>();
     private static ArrayList<Movie> movieList = new ArrayList<Movie>();
+    private static ArrayList<User> userList = new ArrayList<User>();
 
     public static void main(String[] args) {
         initBookInfo();
         initMovieInfo();
+        initUserInfo();
         welcomePage();
     }
 
@@ -24,6 +26,11 @@ public class BibliotecaApp {
     public static void initMovieInfo() {
         movieList.add(new Movie("Titanic",1998,"Cameron",9));
         movieList.add(new Movie("Inception",2010,"Nolan",9));
+    }
+
+    //初始化用户信息
+    public static void initUserInfo() {
+        userList.add(new User("123-4567","password","Jack","jack@gmail.com","1300000"));
     }
 
     //获取全部书籍列表
@@ -50,8 +57,8 @@ public class BibliotecaApp {
     //借书
     public static String checkoutBook(String bookName) {
         for(Book book:bookList){
-            if(book.getName().equals(bookName) && book.getStatus()){
-                book.setStatus(false);
+            if(book.getName().equals(bookName) && book.getState()){
+                book.setState(false);
                 return "Thank you! Enjoy the book\n";
             }
             else if(bookList.indexOf(book)==bookList.size()-1)
@@ -63,8 +70,8 @@ public class BibliotecaApp {
     //还书
     public static String returnBook(String bookName) {
         for(Book book:bookList){
-            if(book.getName().equals(bookName) && !book.getStatus()){
-                book.setStatus(true);
+            if(book.getName().equals(bookName) && !book.getState()){
+                book.setState(true);
                 return "Thank you for returning the book\n";
             }
             else if(bookList.indexOf(book)==bookList.size()-1)
@@ -77,7 +84,7 @@ public class BibliotecaApp {
     public boolean getBookStatus(String bookName) {
         for(Book book:bookList){
             if(book.getName().equals(bookName)){
-                return book.getStatus();
+                return book.getState();
             }
         }
         return false;
@@ -87,7 +94,10 @@ public class BibliotecaApp {
     public static void welcomePage() {
         System.out.println("Welcome to Biblioteca!");
         while(true){
-            System.out.println("select a service please:\n1:getAllBooksList\n2:getBookDetail\n3:checkoutBook\n4:returnBook\n5:quit\n");
+            System.out.println("select a service please:\n1:getAllBooksList\n2:getBookDetail\n3:checkoutBook\n4:returnBook\n" +
+                    "5:getAllMoviesList\n6:getMovieDetail\n7:checkoutMovie\n8:returnMovie\n" +
+                    "9:userSignIn\n10:userSignOut\n11:UserInfoQuery\n" +
+                    "12:quit\n");
             Scanner sc = new Scanner(System.in);
             int number = sc.nextInt();
             //选择服务类型
@@ -117,13 +127,38 @@ public class BibliotecaApp {
                     System.out.println(returnBook(bookname));
                     break;
                 }
-                case 5: System.exit(1);
+                case 5: {
+                    System.out.println(getAllMoviesList());
+                    break;
+                }
+                case 6: {
+                    System.out.println("input movie name:\n");
+                    sc = new Scanner(System.in);
+                    String movieName = sc.nextLine();
+                    System.out.println(getMovieDetail(movieName));
+                    break;
+                }
+                case 7: {
+                    System.out.println("input movie name:\n");
+                    sc = new Scanner(System.in);
+                    String movieName = sc.nextLine();
+                    System.out.println(checkoutMovie(movieName));
+                    break;
+                }
+                case 8: {
+                    System.out.println("input movie name:\n");
+                    sc = new Scanner(System.in);
+                    String movieName = sc.nextLine();
+                    System.out.println(returnMovie(movieName));
+                    break;
+                }
+                case 12: System.exit(1);
                 default: break;
             }
         }
     }
 
-    public String getAllMoviesList() {
+    public static String getAllMoviesList() {
         String movieListStr = "";
         for(Movie movie:movieList){
             movieListStr += movie.getName() + "\n";
@@ -131,11 +166,11 @@ public class BibliotecaApp {
         return movieListStr;
     }
 
-    public String getMovieDetail(String movieName) {
+    public static String getMovieDetail(String movieName) {
         String movieDetailStr = "";
         for(Movie movie:movieList){
             if(movie.getName().equals(movieName)){
-                movieDetailStr = movieName + "\n" +movie.getYear() + "\n" + movie.getDirector()+ "\n" + movie.getRating() + "\n" + movie.getStatus() + "\n";
+                movieDetailStr = movieName + "\n" +movie.getYear() + "\n" + movie.getDirector()+ "\n" + movie.getRating() + "\n" + movie.getState() + "\n";
                 break;
             }
         }
@@ -145,8 +180,8 @@ public class BibliotecaApp {
     //借电影
     public static String checkoutMovie(String movieName) {
         for(Movie movie:movieList){
-            if(movie.getName().equals(movieName) && movie.getStatus()){
-                movie.setStatus(false);
+            if(movie.getName().equals(movieName) && movie.getState()){
+                movie.setState(false);
                 return "Thank you! Enjoy the movie\n";
             }
             else if(movieList.indexOf(movie)==movieList.size()-1)
@@ -158,8 +193,8 @@ public class BibliotecaApp {
     //还电影
     public static String returnMovie(String movieName) {
         for(Movie movie:movieList){
-            if(movie.getName().equals(movieName) && !movie.getStatus()){
-                movie.setStatus(true);
+            if(movie.getName().equals(movieName) && !movie.getState()){
+                movie.setState(true);
                 return "Thank you for returning the movie\n";
             }
             else if(movieList.indexOf(movie)==movieList.size()-1)
@@ -171,7 +206,7 @@ public class BibliotecaApp {
     public boolean getMovieStatus(String movieName) {
         for(Movie movie:movieList){
             if(movie.getName().equals(movieName)){
-                return movie.getStatus();
+                return movie.getState();
             }
         }
         return false;

@@ -8,14 +8,14 @@ public class Movie {
     private int year;
     private String director;
     private int rating;
-    private boolean status;
+    private boolean state;
 
     public Movie(String name, int year, String director, int rating) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.rating = rating;
-        this.status = true;
+        this.state = true;
     }
 
     public String getName() {
@@ -34,11 +34,11 @@ public class Movie {
         return rating;
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean getState() {
+        return state;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setState(boolean state) {
+        this.state = state;
     }
 }

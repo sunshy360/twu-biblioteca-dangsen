@@ -7,21 +7,21 @@ public class Book {
     private String name;
     private String author;
     private String publish;
-    private boolean status;
+    private boolean state;
 
     public Book(String name, String author, String publish) {
         this.name = name;
         this.author = author;
         this.publish = publish;
-        this.status = true;
+        this.state = true;
     }
 
-    public boolean getStatus() {
-        return status;
+    public boolean getState() {
+        return state;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setState(boolean state) {
+        this.state = state;
     }
 
     public String getName() {
@@ -38,6 +38,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return this.getName() + "\n" + this.getAuthor() + "\n" + this.getPublish() + "\n" + this.getStatus() + "\n";
+        return this.getName() + "\n" + this.getAuthor() + "\n" + this.getPublish() + "\n" + this.getState() + "\n";
     }
 }

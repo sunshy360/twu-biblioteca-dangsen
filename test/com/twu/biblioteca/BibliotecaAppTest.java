@@ -12,6 +12,7 @@ public class BibliotecaAppTest {
     public void beforeThings(){
         bibliotecaAppObj.initBookInfo();
         bibliotecaAppObj.initMovieInfo();
+        bibliotecaAppObj.initUserInfo();
     }
 
     @Test
