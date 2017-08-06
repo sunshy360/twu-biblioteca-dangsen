@@ -157,6 +157,7 @@ public class BibliotecaApp {
         }
         return false;
     }
+    //Todo. Add book or movie info to corresponding user object
 
     //用户登出
     public static boolean userSignOut(String id) {
