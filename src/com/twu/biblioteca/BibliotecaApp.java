@@ -90,6 +90,92 @@ public class BibliotecaApp {
         return false;
     }
 
+
+    public static String getAllMoviesList() {
+        String movieListStr = "";
+        for(Movie movie:movieList){
+            movieListStr += movie.getName() + "\n";
+        }
+        return movieListStr;
+    }
+
+    public static String getMovieDetail(String movieName) {
+        String movieDetailStr = "";
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName)){
+                movieDetailStr = movieName + "\n" +movie.getYear() + "\n" + movie.getDirector()+ "\n" + movie.getRating() + "\n" + movie.getState() + "\n";
+                break;
+            }
+        }
+        return movieDetailStr;
+    }
+
+    //借电影
+    public static String checkoutMovie(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName) && movie.getState()){
+                movie.setState(false);
+                return "Thank you! Enjoy the movie\n";
+            }
+            else if(movieList.indexOf(movie)==movieList.size()-1)
+                break;
+        }
+        return "That movie is not available\n";
+    }
+
+    //还电影
+    public static String returnMovie(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName) && !movie.getState()){
+                movie.setState(true);
+                return "Thank you for returning the movie\n";
+            }
+            else if(movieList.indexOf(movie)==movieList.size()-1)
+                break;
+        }
+        return "That is not a valid movie to return\n";
+    }
+
+    public boolean getMovieStatus(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName)){
+                return movie.getState();
+            }
+        }
+        return false;
+    }
+
+    public static boolean userSignIn(String id, String password) {
+        for(User user:userList){
+            if(user.getId().equals(id) && user.getPassword().equals(password)){
+                user.setLogState(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean userSignOut(String id) {
+        for(User user:userList){
+            if(user.getId().equals(id)){
+                user.setLogState(false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean userInfoQuery(String id, String password) {
+        for(User user:userList){
+            if(user.getId().equals(id) && user.getPassword().equals(password) && user.getLogState()){
+                System.out.println(user.toString());
+                return true;
+            }
+        }
+        System.out.println("invalid");
+        return false;
+    }
+
     //欢迎页面
     public static void welcomePage() {
         System.out.println("Welcome to Biblioteca!");
@@ -152,94 +238,32 @@ public class BibliotecaApp {
                     System.out.println(returnMovie(movieName));
                     break;
                 }
+                case 9: {
+                    System.out.println("input user_id and password(enter for seperate):\n");
+                    sc = new Scanner(System.in);
+                    String user_id = sc.nextLine();
+                    String password = sc.nextLine();
+                    System.out.println(userSignIn(user_id,password));
+                    break;
+                }
+                case 10: {
+                    System.out.println("input user_id:\n");
+                    sc = new Scanner(System.in);
+                    String user_id = sc.nextLine();
+                    System.out.println(userSignOut(user_id));
+                    break;
+                }
+                case 11: {
+                    System.out.println("input user_id and password(enter for seperate):\n");
+                    sc = new Scanner(System.in);
+                    String user_id = sc.nextLine();
+                    String password = sc.nextLine();
+                    userInfoQuery(user_id,password);
+                    break;
+                }
                 case 12: System.exit(1);
                 default: break;
             }
         }
-    }
-
-    public static String getAllMoviesList() {
-        String movieListStr = "";
-        for(Movie movie:movieList){
-            movieListStr += movie.getName() + "\n";
-        }
-        return movieListStr;
-    }
-
-    public static String getMovieDetail(String movieName) {
-        String movieDetailStr = "";
-        for(Movie movie:movieList){
-            if(movie.getName().equals(movieName)){
-                movieDetailStr = movieName + "\n" +movie.getYear() + "\n" + movie.getDirector()+ "\n" + movie.getRating() + "\n" + movie.getState() + "\n";
-                break;
-            }
-        }
-        return movieDetailStr;
-    }
-
-    //借电影
-    public static String checkoutMovie(String movieName) {
-        for(Movie movie:movieList){
-            if(movie.getName().equals(movieName) && movie.getState()){
-                movie.setState(false);
-                return "Thank you! Enjoy the movie\n";
-            }
-            else if(movieList.indexOf(movie)==movieList.size()-1)
-                break;
-        }
-        return "That movie is not available\n";
-    }
-
-    //还电影
-    public static String returnMovie(String movieName) {
-        for(Movie movie:movieList){
-            if(movie.getName().equals(movieName) && !movie.getState()){
-                movie.setState(true);
-                return "Thank you for returning the movie\n";
-            }
-            else if(movieList.indexOf(movie)==movieList.size()-1)
-                break;
-        }
-        return "That is not a valid movie to return\n";
-    }
-
-    public boolean getMovieStatus(String movieName) {
-        for(Movie movie:movieList){
-            if(movie.getName().equals(movieName)){
-                return movie.getState();
-            }
-        }
-        return false;
-    }
-
-    public boolean userSignIn(String id, String password) {
-        for(User user:userList){
-            if(user.getId().equals(id) && user.getPassword().equals(password)){
-                user.setLogState(true);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean userSignOut(String id) {
-        for(User user:userList){
-            if(user.getId().equals(id)){
-                user.setLogState(false);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean userInfoQuery(String id, String password) {
-        for(User user:userList){
-            if(user.getId().equals(id) && user.getPassword().equals(password) && user.getLogState()){
-                System.out.println(user.toString());
-                return true;
-            }
-        }
-        System.out.println("invalid");
-        return false;
     }
 }
