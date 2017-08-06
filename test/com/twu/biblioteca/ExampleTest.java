@@ -12,7 +12,6 @@ public class ExampleTest {
         assertEquals("Math\nChemical\nComputer\n", bibliotecaAppObj.getAllBooksList());
     }
 
-
     @Test
     public void getBookDetailTest() {
         assertEquals("Math\nJohn\nA\n", bibliotecaAppObj.getBookDetail("Math"));

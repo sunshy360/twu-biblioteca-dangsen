@@ -12,7 +12,7 @@ public class BibliotecaApp {
         welcomePage();
     }
 
-
+    //获取全部书籍列表
     public static String getAllBooksList() {
         String bookListStr = "";
         for(String book:bookList){
@@ -21,6 +21,7 @@ public class BibliotecaApp {
         return bookListStr;
     }
 
+    //获取书籍详情
     public static String getBookDetail(String bookName) {
         String bookDetailStr = "";
         for(int i=0;i<bookList.length;i++){
@@ -32,6 +33,7 @@ public class BibliotecaApp {
         return bookDetailStr;
     }
 
+    //借书
     public static String checkoutBook(String bookName) {
         for(int i=0;i<bookList.length;i++) {
             if (bookList[i].equals(bookName) && statusList[i]) {
@@ -44,6 +46,7 @@ public class BibliotecaApp {
         return "That book is not available\n";
     }
 
+    //还书
     public static String returnBook(String bookName) {
         for(int i=0;i<bookList.length;i++) {
             if (bookList[i].equals(bookName) && !statusList[i]) {
@@ -56,7 +59,7 @@ public class BibliotecaApp {
         return "That is not a valid book to return\n";
     }
 
-
+    //获取书籍借阅状态
     public boolean getBookStatus(String bookName) {
         for(int i=0;i<bookList.length;i++){
             if(bookList[i].equals(bookName)){
@@ -66,12 +69,14 @@ public class BibliotecaApp {
         return false;
     }
 
+    //欢迎页面
     public static void welcomePage() {
         System.out.println("Welcome to Biblioteca!");
         while(true){
             System.out.println("select a service please:\n1:getAllBooksList\n2:getBookDetail\n3:checkoutBook\n4:returnBook\n5:quit\n");
             Scanner sc = new Scanner(System.in);
             int number = sc.nextInt();
+            //选择服务类型
             switch(number) {
                 case 1: {
                     System.out.println(getAllBooksList());
