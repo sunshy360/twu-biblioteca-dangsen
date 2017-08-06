@@ -67,7 +67,7 @@ public class BibliotecaApp {
                 book.setStatus(true);
                 return "Thank you for returning the book\n";
             }
-            else if(!book.getName().equals(bookName) && bookList.indexOf(book)==bookList.size()-1)
+            else if(bookList.indexOf(book)==bookList.size()-1)
                 break;
         }
         return "That is not a valid book to return\n";
@@ -140,5 +140,40 @@ public class BibliotecaApp {
             }
         }
         return movieDetailStr;
+    }
+
+    //借电影
+    public static String checkoutMovie(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName) && movie.getStatus()){
+                movie.setStatus(false);
+                return "Thank you! Enjoy the movie\n";
+            }
+            else if(movieList.indexOf(movie)==movieList.size()-1)
+                break;
+        }
+        return "That movie is not available\n";
+    }
+
+    //还电影
+    public static String returnMovie(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName) && !movie.getStatus()){
+                movie.setStatus(true);
+                return "Thank you for returning the movie\n";
+            }
+            else if(movieList.indexOf(movie)==movieList.size()-1)
+                break;
+        }
+        return "That is not a valid movie to return\n";
+    }
+
+    public boolean getMovieStatus(String movieName) {
+        for(Movie movie:movieList){
+            if(movie.getName().equals(movieName)){
+                return movie.getStatus();
+            }
+        }
+        return false;
     }
 }

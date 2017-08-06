@@ -64,6 +64,32 @@ public class BibliotecaAppTest {
     }
 
     @Test
+    public void checkoutMovieMessageTest() {
+        assertEquals("Thank you! Enjoy the movie\n", bibliotecaAppObj.checkoutMovie("Titanic"));
+        assertEquals("That movie is not available\n", bibliotecaAppObj.checkoutMovie("Titanic"));
+        assertEquals("That movie is not available\n", bibliotecaAppObj.checkoutMovie("Avatar"));
+    }
+
+    @Test
+    public void checkoutMovieStatusTest() {
+        bibliotecaAppObj.checkoutMovie("Titanic");
+        assertEquals(false, bibliotecaAppObj.getMovieStatus("Titanic"));
+    }
+    @Test
+    public void returnMovieMessageTest() {
+        bibliotecaAppObj.checkoutMovie("Titanic");
+        assertEquals("Thank you for returning the movie\n", bibliotecaAppObj.returnMovie("Titanic"));
+        assertEquals("That is not a valid movie to return\n", bibliotecaAppObj.returnMovie("Titanic"));
+        assertEquals("That is not a valid movie to return\n", bibliotecaAppObj.returnMovie("Avatar"));
+    }
+
+    @Test
+    public void returnMovieStatusTest() {
+        bibliotecaAppObj.checkoutMovie("Titanic");
+        bibliotecaAppObj.returnMovie("Titanic");
+        assertEquals(true, bibliotecaAppObj.getMovieStatus("Titanic"));
+    }
+    @Test
     public void test() {
         assertEquals(1, 1);
     }
