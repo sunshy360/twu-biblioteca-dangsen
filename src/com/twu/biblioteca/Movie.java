@@ -41,4 +41,9 @@ public class Movie {
     public void setState(boolean state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return this.name + "\n" + this.year + "\n" + this.director + "\n" + this.rating + "\n" + this.state + "\n";
+    }
 }

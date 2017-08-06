@@ -38,6 +38,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return this.getName() + "\n" + this.getAuthor() + "\n" + this.getPublish() + "\n" + this.getState() + "\n";
+        return this.name + "\n" + this.author + "\n" + this.publish + "\n" + this.state + "\n";
     }
 }

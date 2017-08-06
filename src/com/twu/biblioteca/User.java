@@ -31,7 +31,7 @@ public class User {
         return password;
     }
 
-    public boolean isLogState() {
+    public boolean getLogState() {
         return logState;
     }
 
@@ -65,5 +65,10 @@ public class User {
 
     public void setMovieList(ArrayList<String> movieList) {
         this.movieList = movieList;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "\n" + this.email + "\n" + this.phoneNumber + "\n" + this.bookList + "\n" + this.movieList + "\n";
     }
 }

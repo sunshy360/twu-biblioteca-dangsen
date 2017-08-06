@@ -221,4 +221,24 @@ public class BibliotecaApp {
         }
         return false;
     }
+
+    public boolean userSignOut(String id) {
+        for(User user:userList){
+            if(user.getId().equals(id)){
+                user.setLogState(false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean userInfoQuery(String id, String password) {
+        for(User user:userList){
+            if(user.getId().equals(id) && user.getPassword().equals(password) && user.getLogState()){
+                user.setLogState(true);
+                return true;
+            }
+        }
+        return false;
+    }
 }
